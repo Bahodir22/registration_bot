@@ -96,7 +96,8 @@ async def enter_adress(message: types.Message, state: FSMContext):
     await Form.next()    
 
 
-@dp.message_handler(state=Form.phone_number)
+
+@dp.message_handler(content_types=types.ContentTypes.CONTACT, state=Form.phone_number)
 async def enter_phone_number(message: types.Message, state: FSMContext):
     if message.contact.user_id == message.from_user.id:
         # o'zini kontakti
@@ -111,7 +112,8 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
         adress = datas['adress']
         phone_number = datas['phone_number']
         txt = [
-            f"👤Ismi: {name}",
+            f"👤Foydalanuvchi: {message.from_user.get_mention(as_html=True)}",
+            f"👥Ismi: {name}",
             f"📆Tug'ilgan kuni: {birth_date}",
             f"📍Manzili: {adress}",
             f"📞Tel: {phone_number}"
@@ -144,6 +146,20 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
             )
         )
         
+
+@dp.message_handler(content_types=types.ContentTypes.ANY, state=Form.phone_number)
+async def enter_phone_number_error(message: types.Message, state: FSMContext):
+    await message.answer(
+        text="Iltimos faqat o'zingizning telefon raqamingizni yuboring.",
+        reply_markup=types.ReplyKeyboardMarkup(
+            keyboard=[
+                [types.KeyboardButton(text="📞Telefon raqamni yuborish", request_contact=True)]
+            ],
+            resize_keyboard=True,
+            one_time_keyboard=True,
+        )
+    )
+
 
 @dp.callback_query_handler(text_startswith="ok_", user_id=ADMIN_ID)
 async def admin_commit(call: types.CallbackQuery):
