@@ -112,7 +112,8 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
         adress = datas['adress']
         phone_number = datas['phone_number']
         txt = [
-            f"👤Ismi: {name}",
+            f"👤Foydalanuvchi: {message.from_user.get_mention(as_html=True)}",
+            f"👥Ismi: {name}",
             f"📆Tug'ilgan kuni: {birth_date}",
             f"📍Manzili: {adress}",
             f"📞Tel: {phone_number}"
