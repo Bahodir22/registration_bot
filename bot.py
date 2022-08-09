@@ -118,7 +118,7 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
             f"👥Ismi: {name}",
             f"📆Tug'ilgan kuni: {birth_date}",
             f"📍Manzili: {adress}",
-            f"📞Tel: {phone_number}"
+            f"📞Tel: +{phone_number}"
         ]
         m = await message.answer(
             "\n".join(txt)
