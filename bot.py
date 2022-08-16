@@ -24,12 +24,7 @@ def valid_date(date_text: str):
         return False
 
 
-
-@dp.message_handler(commands='start')
-async def cmd_start(message: types.Message):
-    await message.answer(
-        text=f"Assalomu alaykum {message.from_user.get_mention(as_html=True)} \nMen reguztelecom_bot!\nmijozlarni qo'llab-quvvatlash botiga xush kelibsiz!",
-        reply_markup=types.ReplyKeyboardMarkup(
+main_keyboard=types.ReplyKeyboardMarkup(
             keyboard=[
                 [types.KeyboardButton(text="🛠 xizmatlar haqida ma'lumot")],
                 [types.KeyboardButton(text="🛍 Tariflar haqida ma'lumot")],
@@ -37,6 +32,11 @@ async def cmd_start(message: types.Message):
             ],
             resize_keyboard=True
         )
+@dp.message_handler(commands='start')
+async def cmd_start(message: types.Message):
+    await message.answer(
+        text=f"Assalomu alaykum {message.from_user.get_mention(as_html=True)} \nMen reguztelecom_bot!\nmijozlarni qo'llab-quvvatlash botiga xush kelibsiz!",
+        reply_markup=main_keyboard
     )
 
     
@@ -166,7 +166,9 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
             ])
         )
         
-        await m.reply("Sizning ma'lumotlaringiz adminga yuborildi. Tasdiqlanishini kuting.")
+        await m.reply("Sizning ma'lumotlaringiz adminga yuborildi. Tasdiqlanishini kuting.",
+        reply_markup=main_keyboard
+                      )
         
         await state.finish() 
     else:
@@ -205,7 +207,8 @@ async def admin_commit(call: types.CallbackQuery):
     user = call.data.replace("ok_", '')
     await bot.send_message(
         chat_id=user,
-        text="Sizning ma'lumotlaringiz admin tomonidan tasdiqlandi. Endi botdan foydalanishingiz mumkin."
+        text="Sizning ma'lumotlaringiz admin tomonidan tasdiqlandi. Endi botdan foydalanishingiz mumkin.",
+        reply_markup=main_keyboard
     )
     
     
