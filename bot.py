@@ -66,9 +66,9 @@ async def cmd_menu2(message: types.Message):
 
 @dp.message_handler(text="📝 ariza qoldirish")
 async def cmd_menu3(message: types.Message):
-    await message.answer(f"To'liq ism-familyangizni kiriting",
-    await Form.name.set(),
-    reply_markup=types.ReplyKeyboardRemove())
+    await message.answer(f"To'liq ism-familyangizni kiriting",reply_markup = types.ReplyKeyboardRemove()),
+    await Form.name.set()
+
 
 
 @dp.message_handler(state=Form.name)
