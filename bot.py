@@ -66,7 +66,7 @@ async def cmd_menu2(message: types.Message):
 
 @dp.message_handler(text="📝 ariza qoldirish")
 async def cmd_menu3(message: types.Message):
-    await message.answer(f"To'liq ism-familyangizni kiriting",reply_markup = types.ReplyKeyboardRemove()),
+    await message.answer(f"👉 To'liq ism-familyangizni kiriting...",reply_markup = types.ReplyKeyboardRemove()),
     await Form.name.set()
 
 
@@ -78,7 +78,7 @@ async def form_name(message: types.Message, state: FSMContext = None) -> None:
     )
     
     await message.answer(
-        "Tug'ilgan kun oy yilingizni dd.mm.yyyy formatda kiriting.\n"
+        "👉 Tug'ilgan kun oy yilingizni dd.mm.yyyy formatda kiriting...\n"
         "Masalan 31.12.1999"
     )
     
@@ -94,7 +94,7 @@ async def form_name(message: types.Message, state: FSMContext = None) -> None:
         )
         
         await message.answer(
-            "Yashash manzilingizni kiriting.\n"
+            "👉 Yashash manzilingizni kiriting...\n"
             "Viloyat, mahalla, ko'cha, xonadon"
         )
 
@@ -102,8 +102,8 @@ async def form_name(message: types.Message, state: FSMContext = None) -> None:
 
     else:
         await message.answer(
-            "Noto'g'ri format!\n"
-            "Iltimos qayta tekshirib dd.mm.yyyy formatda kiriting.\n"
+            "⚠️Noto'g'ri format!\n"
+            "Iltimos qayta tekshirib dd.mm.yyyy formatda kiriting...\n"
             "Masalan 31.12.1999"
         )
    
@@ -116,7 +116,7 @@ async def enter_adress(message: types.Message, state: FSMContext):
     )
 
     await message.answer(
-        text="Pastdagi <b>«📞Telefon raqamni yuborish»</b> tugmasini bosib telefon raqamingizni jo'nating",
+        text="👉 Pastdagi <b>«📞Telefon raqamni yuborish»</b> tugmasini bosib telefon raqamingizni jo'nating...",
         reply_markup=types.ReplyKeyboardMarkup(
             keyboard=[
                 [types.KeyboardButton(text="📞Telefon raqamni yuborish", request_contact=True)]
@@ -147,11 +147,11 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
         if phone_number[0] != '+':
             phone_number = '+' + phone_number
         txt = [
-            f"👤Foydalanuvchi: {message.from_user.get_mention(as_html=True)}",
-            f"👥Ismi: {name}",
-            f"📆Tug'ilgan kuni: {birth_date}",
-            f"📍Manzili: {adress}",
-            f"📞Tel: {phone_number}"
+            f"👤 Foydalanuvchi: {message.from_user.get_mention(as_html=True)}",
+            f"👥 Ismi: {name}",
+            f"📆 Tug'ilgan kuni: {birth_date}",
+            f"📍 Manzili: {adress}",
+            f"📞 Tel: {phone_number}"
         ]
         m = await message.answer(
             "\n".join(txt)
@@ -166,14 +166,14 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
             ])
         )
         
-        await m.reply("Sizning ma'lumotlaringiz adminga yuborildi. Tasdiqlanishini kuting.",
+        await m.reply("Sizning ma'lumotlaringiz adminga yuborildi. Tasdiqlanishini kuting...⏳",
         reply_markup=main_keyboard
                       )
         
         await state.finish() 
     else:
         await message.answer(
-            text="Iltimos faqat o'zingizning telefon raqamingizni yuboring.",
+            text="⚠️Iltimos faqat o'zingizning telefon raqamingizni yuboring...",
             reply_markup=types.ReplyKeyboardMarkup(
                 keyboard=[
                     [types.KeyboardButton(text="📞Telefon raqamni yuborish", request_contact=True)]
@@ -187,7 +187,7 @@ async def enter_phone_number(message: types.Message, state: FSMContext):
 @dp.message_handler(content_types=types.ContentTypes.ANY, state=Form.phone_number)
 async def enter_phone_number_error(message: types.Message, state: FSMContext):
     await message.answer(
-        text="Iltimos faqat o'zingizning telefon raqamingizni yuboring.",
+        text="⚠️Iltimos faqat o'zingizning telefon raqamingizni yuboring...",
         reply_markup=types.ReplyKeyboardMarkup(
             keyboard=[
                 [types.KeyboardButton(text="📞Telefon raqamni yuborish", request_contact=True)]
@@ -207,7 +207,7 @@ async def admin_commit(call: types.CallbackQuery):
     user = call.data.replace("ok_", '')
     await bot.send_message(
         chat_id=user,
-        text="Sizning ma'lumotlaringiz admin tomonidan tasdiqlandi. Endi botdan foydalanishingiz mumkin.",
+        text="✅ Sizning ma'lumotlaringiz admin tomonidan tasdiqlandi. Endi botdan foydalanishingiz mumkin...",
         reply_markup=main_keyboard
     )
     
@@ -221,7 +221,7 @@ async def admin_cancel(call: types.CallbackQuery):
     user = call.data.replace("no_", '')
     await bot.send_message(
         chat_id=user,
-        text="Sizning ma'lumotlaringiz admin tomonidan rad etildi😕"
+        text="❗️Sizning ma'lumotlaringiz admin tomonidan rad etildi😕"
     )
 
 
