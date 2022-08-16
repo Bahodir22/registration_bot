@@ -28,7 +28,7 @@ def valid_date(date_text: str):
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
     await message.answer(
-        text=f"Assalomu alaykum {message.from_user.get_mention(as_html=True)} \nMen SanoBot!\nmijozlarni qo'llab-quvvatlash botiga xush kelibsiz!",
+        text=f"Assalomu alaykum {message.from_user.get_mention(as_html=True)} \nMen reguztelecom_bot!\nmijozlarni qo'llab-quvvatlash botiga xush kelibsiz!",
         reply_markup=types.ReplyKeyboardMarkup(
             keyboard=[
                 [types.KeyboardButton(text="🛠 xizmatlar haqida ma'lumot")],
@@ -53,7 +53,7 @@ async def cmd_menu1(message: types.Message):
 
 @dp.message_handler(text="🛍 Tariflar haqida ma'lumot")
 async def cmd_menu2(message: types.Message):
-    await message.answer_photo(open(r".\images\phototariflar.jpg", 'rb').read())
+    await message.answer_photo(open(r"./images/phototariflar.jpg", 'rb').read())
     await message.answer(
         text=f"🔴 YANGI 1 - 109990 sum 20Mb/s"
             "\n🟡 YANGI 2 - 139990 sum 40Mb/s"
