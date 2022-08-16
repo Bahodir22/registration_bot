@@ -51,16 +51,17 @@ async def cmd_menu1(message: types.Message):
 
     )
 
+
 @dp.message_handler(text="🛍 Tariflar haqida ma'lumot")
 async def cmd_menu2(message: types.Message):
-    await message.answer_photo(open("./images/phototariflar.jpg"), caption=f"🔴 YANGI 1 - 109990 sum 20Mb/s"
+    await message.answer_photo(open("./images/phototariflar.jpg"),
+            caption=f"🔴 YANGI 1 - 109990 sum 20Mb/s"
             "\n🟡 YANGI 2 - 139990 sum 40Mb/s"
             "\n🟢 YANGI 3 - 169990 sum 60Mb/s"
             "\n🔵 YANGI 4 - 199990 sum 100Mb/s"
-
-
-
     )
+
+
 
 @dp.message_handler(text="📝 ariza qoldirish")
 async def cmd_menu3(message: types.Message):
