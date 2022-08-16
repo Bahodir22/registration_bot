@@ -53,7 +53,7 @@ async def cmd_menu1(message: types.Message):
 
 @dp.message_handler(text="🛍 Tariflar haqida ma'lumot")
 async def cmd_menu2(message: types.Message):
-    await message.answer_photo(open(r"C:\Users\User\Downloads\sanobot\phototariflar.jpg", 'rb').read())
+    await message.answer_photo(open(r"C:\Users\User\Documents\GitHub\reguztelecom_bot\registration_bot\phototariflar.jpg", 'rb').read())
     await message.answer(
         text=f"🔴 YANGI 1 - 109990 sum 20Mb/s"
             "\n🟡 YANGI 2 - 139990 sum 40Mb/s"
