@@ -25,18 +25,48 @@ def valid_date(date_text: str):
 
 
 
-@dp.message_handler(commands='start', state='*')
-async def cmd_start(message: types.Message, state: FSMContext = None) -> None:
-    await state.finish()
-    await message.answer(f"Assalomu alaykum {message.from_user.get_mention(as_html=True)}")
+@dp.message_handler(commands='start')
+async def cmd_start(message: types.Message):
+    await message.answer(
+        text=f"Assalomu alaykum {message.from_user.get_mention(as_html=True)} \nMen SanoBot!\nmijozlarni qo'llab-quvvatlash botiga xush kelibsiz!",
+        reply_markup=types.ReplyKeyboardMarkup(
+            keyboard=[
+                [types.KeyboardButton(text="🛠 xizmatlar haqida ma'lumot")],
+                [types.KeyboardButton(text="🛍 Tariflar haqida ma'lumot")],
+                [types.KeyboardButton(text="📝 ariza qoldirish")],
+            ],
+            resize_keyboard=True
+        )
+    )
+
+    
+    
+@dp.message_handler(text="🛠 xizmatlar haqida ma'lumot")
+async def cmd_menu1(message: types.Message):
+    await message.answer(
+        text=f"1084 - internet va IPTV xizmatlari"
+              "\n1086 - telefon ta'mirlash byurosi"
+              "\n1099 - mobil aloqa xizmatlari"
+              "\n1155 - korporativ mijozlar uchun"
+
+    )
+
+@dp.message_handler(text="🛍 Tariflar haqida ma'lumot")
+async def cmd_menu2(message: types.Message):
+    await message.answer_photo(open(r"C:\Users\User\Downloads\sanobot\phototariflar.jpg", 'rb').read())
+    await message.answer(
+        text=f"🔴 YANGI 1 - 109990 sum 20Mb/s"
+            "\n🟡 YANGI 2 - 139990 sum 40Mb/s"
+            "\n🟢 YANGI 3 - 169990 sum 60Mb/s"
+            "\n🔵 YANGI 4 - 199990 sum 100Mb/s"
+
+    )
+
+@dp.message_handler(text="📝 ariza qoldirish")
+async def cmd_menu3(message: types.Message):
     await message.answer(f"To'liq ism-familyangizni kiriting")
     await Form.name.set()
-    
-    
-@dp.message_handler(commands=['help', 'about'])
-async def cmd_help(message: types.Message) -> None:
-    await message.answer("Help")
-    
+
 
 @dp.message_handler(state=Form.name)
 async def form_name(message: types.Message, state: FSMContext = None) -> None:
@@ -187,4 +217,12 @@ async def admin_cancel(call: types.CallbackQuery):
         chat_id=user,
         text="Sizning ma'lumotlaringiz admin tomonidan rad etildi😕"
     )
+
+
+@dp.message_handler(commands="help")
+async def help_handler(message : types.Message):
+    await message.reply(f"1084 - internet va IPTV xizmatlari"
+                        "\n1086 - telefon ta'mirlash byurosi"
+                        "\n1099 - mobil aloqa xizmatlari"
+                        "\n1155 - korporativ mijozlar uchun")
     
